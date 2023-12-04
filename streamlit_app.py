@@ -24,7 +24,7 @@ if uploaded_image is not None:
     image = Image.open(uploaded_image).convert('RGB')
     st.image(image, caption='Uploaded Image', use_column_width=True)
     
-    class_name = ['Alaxan', 'Bactidol', 'Decolgen', 'Fish Oil', 'Kremil S']
+    class_name = ['Alaxan', 'Bactidol', 'Decolgen', 'Fish_Oil', 'Kremil_S']
 
     if st.button('Prediction'):
         #Prediction class
