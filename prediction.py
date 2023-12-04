@@ -9,7 +9,7 @@ def pred_class(model: torch.nn.Module,
                image_size: Tuple[int, int] = (224, 224),
                ):
     # Check device availability
-    device = torch.device("cpu")
+    device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
     # Move model and input image to the selected device
     model.to(device)
