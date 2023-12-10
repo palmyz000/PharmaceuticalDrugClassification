@@ -1,20 +1,29 @@
-import streamlit as st
 import torch
-import torchvision.transforms as T
+import torchvision.transforms as transforms
 from PIL import Image
 import numpy as np
+import tensorflow as tf
 
-# Load the model
+# Load the TensorFlow model
+model = tf.keras.models.load_model('modelmobilenetv3.h5')
+
+# Convert the TensorFlow model to PyTorch
+dummy_input = tf.ones((1, 224, 224, 3))  # Create a dummy input (change the shape as needed)
+model_path = 'converted_model.pth'  # Define the path for the PyTorch model
+torch_model = torch.jit.trace(model, dummy_input)
+torch.save(torch_model.state_dict(), model_path)
+
+# Now use the PyTorch model
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-model = torch.load('modelmobilenetv3.h5', map_location=device)
+model = torch.jit.load(model_path, map_location=device)
 model.eval()
 
 # Set the image transformation
-image_size = (224, 224)  # You can adjust the size as needed
-image_transform = T.Compose([
-    T.Resize(image_size),
-    T.ToTensor(),
-    T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+image_size = (224, 224)
+image_transform = transforms.Compose([
+    transforms.Resize(image_size),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
 ])
 
 # Set title and header
