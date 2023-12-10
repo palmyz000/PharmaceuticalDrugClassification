@@ -6,7 +6,7 @@ import numpy as np
 
 # Load the model
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-model = torch.load('mobilenetv3_large_100_checkpoint_fold2.pt', map_location=device)
+model = torch.load('modelmobilenetv3.h5', map_location=device)
 model.eval()
 
 # Set the image transformation
