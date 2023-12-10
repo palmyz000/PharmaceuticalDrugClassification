@@ -22,8 +22,8 @@ model = load_model('./model/saved_model.h5')
 
 # load class names
 with open('./model/labels.txt', 'r') as f:
-    class_names = [a[:-1].split(' ')[1] for a in f.readlines()]
-    f.close()
+    class_names = [line.strip().split(' ', 1)[1] for line in f.readlines()]
+
 
 # display image
 if file is not None:
