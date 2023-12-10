@@ -11,7 +11,7 @@ st.title('Pharmaceutical Drugs Classification')
 st.header('Please upload a picture')
 
 # Load Model 
-model = tf.keras.models.load_model('modelmobilenetv3.h5')
+model = tf.keras.models.load_model('saved_model.h5')
 
 # Display image & Prediction 
 uploaded_image = st.file_uploader('Choose an image', type=['jpg', 'jpeg', 'png'])
