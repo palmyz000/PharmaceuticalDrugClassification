@@ -1,9 +1,10 @@
 import streamlit as st 
-import tensorflow as tf
+from keras.models import load_model
 from PIL import Image
 from prediction import pred_class
 import numpy as np
-
+from util import classify, set_background
+set_background('./bgs/bg5.png')
 # Set title 
 st.title('Pharmaceutical Drugs Classification')
 
@@ -11,7 +12,7 @@ st.title('Pharmaceutical Drugs Classification')
 st.header('Please upload a picture')
 
 # Load Model 
-model = tf.keras.models.load_model('./model/saved_model.h5')
+model = load_model('./model/mobilenetv3_model.h5')
 
 # Display image & Prediction 
 uploaded_image = st.file_uploader('Choose an image', type=['jpg', 'jpeg', 'png'])

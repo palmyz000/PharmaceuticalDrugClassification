@@ -18,11 +18,13 @@ st.header('Please upload a picture')
 file = st.file_uploader('', type=['jpeg', 'jpg', 'png'])
 
 # load classifier
-model = load_model('./model/saved_model.h5')
+model = load_model('./model/mobilenetv3_model.h5')
 
 # load class names
 with open('./model/labels.txt', 'r') as f:
-    class_names = [line.strip().split(' ', 1)[1] for line in f.readlines()]
+    class_names = [line.strip().split(' ', 1)[1] for line in f.readlines() if line.strip()]
+
+
 
 
 # display image
